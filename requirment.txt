@@ -1,9 +1,0 @@
-# Core libraries for data handling and exchange interaction
-ccxt
-pandas
-pyarrow
-fastparquet
-
-# Optional for advanced scheduling and logging
-schedule
-loguru
