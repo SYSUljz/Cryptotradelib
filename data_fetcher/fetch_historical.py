@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 import time
 
-from config import EXCHANGE_CONFIGS
+from config import EXCHANGE_CONFIGS, USE_SANDBOX
 
 
 class HistoricalFetcher:
@@ -23,6 +23,8 @@ class HistoricalFetcher:
         config = EXCHANGE_CONFIGS[exchange_id]
         exchange_class = getattr(ccxt, exchange_id)
         self.exchange = exchange_class(config)
+        if USE_SANDBOX == True:
+            self.exchange.set_sandbox_mode(True)
         self.exchange.load_markets()
         print(f"Initialized fetcher for {exchange_id}.")
 

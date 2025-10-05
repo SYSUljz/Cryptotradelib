@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import os
 
 # -----------------------------------------------------------------------------
 # API Keys Configuration
@@ -7,10 +8,10 @@
 # 建议使用环境变量或更安全的密钥管理方式
 EXCHANGE_CONFIGS = {
     "binance": {
-        "apiKey": "YOUR_BINANCE_API_KEY",
-        "secret": "YOUR_BINANCE_SECRET_KEY",
+        "apiKey": os.getenv("BINANCE_API_KEY"),
+        "secret": os.getenv("BINANCE_SECRET_KEY"),
         "options": {
-            "defaultType": "swap",  # or 'future', 'spot'
+            "defaultType": "spot",  # or 'future', 'spot'
         },
     },
     "okx": {
@@ -41,3 +42,5 @@ WS_SYMBOLS = [
 
 # 需要订阅的交易所
 WS_EXCHANGES = ["binance", "okx"]
+
+USE_SANDBOX = True

@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "test_run",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "pythonPath": "/Users/jackli/miniconda3/envs/ccxt/bin/python",
+            "console": "integratedTerminal",
+            "python.envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
