@@ -29,7 +29,7 @@ EXCHANGE_CONFIGS = {
 # Data Storage Configuration
 # -----------------------------------------------------------------------------
 # 数据存储的根目录
-DATA_ROOT_PATH = "./data/"
+DATA_ROOT_PATH = "data/"
 
 # -----------------------------------------------------------------------------
 # WebSocket Subscription Configuration

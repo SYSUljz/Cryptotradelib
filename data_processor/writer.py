@@ -27,17 +27,20 @@ def save_to_parquet(df: pd.DataFrame, data_type: str, exchange: str, symbol: str
     symbol_path_name = symbol.replace("/", "_")
 
     base_path = os.path.join(
-        DATA_ROOT_PATH, data_type, f"exchange={exchange}", f"symbol={symbol_path_name}"
+        DATA_ROOT_PATH,
+        data_type,
+        f"{exchange}",
+        f"{symbol_path_name}",
     )
-
+    os.makedirs(base_path, exist_ok=True)
     # 使用 a dataset API with partitioning
     try:
         df.to_parquet(
             base_path,
             engine="fastparquet",
             partition_cols=["date"],
-            append=True,  # 增量写入
-            write_index=False,
+            append=False,  # 增量写入
+            # write_index=False,
         )
         print(f"Successfully saved {len(df)} rows to {base_path}")
     except Exception as e:

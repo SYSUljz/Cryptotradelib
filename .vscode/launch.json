@@ -11,6 +11,25 @@
             "pythonPath": "/Users/jackli/miniconda3/envs/ccxt/bin/python",
             "console": "integratedTerminal",
             "python.envFile": "${workspaceFolder}/.env"
-        }
+        },
+        {
+            "name": "test_run_etl",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "pythonPath": "/Users/jackli/miniconda3/envs/ccxt/bin/python",
+            "console": "integratedTerminal",
+            "python.envFile": "${workspaceFolder}/.env",
+            "args": [
+                "--symbol",
+                "BTC/USDT",
+                "--exchange",
+                "binance",
+                "--start_date",
+                "2023-01-01"
+            ]
+        },
     ]
 }
