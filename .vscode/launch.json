@@ -3,14 +3,13 @@
     "configurations": [
         {
             "name": "test_run",
-            "type": "debugpy",
+            "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "pythonPath": "/Users/jackli/miniconda3/envs/ccxt/bin/python",
-            "console": "integratedTerminal",
-            "python.envFile": "${workspaceFolder}/.env"
+            "pythonPath": "/home/jack_li/miniconda3/envs/ccxt/bin/python3.10",
+            "envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "test_run_etl",
@@ -19,7 +18,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "pythonPath": "/Users/jackli/miniconda3/envs/ccxt/bin/python",
+            "pythonPath": "/home/jack_li/miniconda3/envs/ccxt/bin/python3.10",
             "console": "integratedTerminal",
             "python.envFile": "${workspaceFolder}/.env",
             "args": [
