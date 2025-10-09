@@ -4,7 +4,7 @@ import pandas as pd
 from datetime import datetime
 import time
 
-from config import EXCHANGE_CONFIGS, USE_SANDBOX
+from config import EXCHANGE_CONFIGS_WITHOUT_API_KEYS, USE_SANDBOX
 
 
 class HistoricalFetcher:
@@ -17,10 +17,10 @@ class HistoricalFetcher:
         初始化
         :param exchange_id: 交易所ID, e.g., 'binance'
         """
-        if exchange_id not in EXCHANGE_CONFIGS:
+        if exchange_id not in EXCHANGE_CONFIGS_WITHOUT_API_KEYS:
             raise ValueError(f"Exchange '{exchange_id}' is not configured in config.py")
 
-        config = EXCHANGE_CONFIGS[exchange_id]
+        config = EXCHANGE_CONFIGS_WITHOUT_API_KEYS[exchange_id]
         exchange_class = getattr(ccxt, exchange_id)
         self.exchange = exchange_class(config)
         if USE_SANDBOX == True:
