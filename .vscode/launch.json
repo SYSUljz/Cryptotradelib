@@ -3,13 +3,14 @@
     "configurations": [
         {
             "name": "test_run",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "pythonPath": "/home/jack_li/miniconda3/envs/ccxt/bin/python3.10",
-            "envFile": "${workspaceFolder}/.env"
+            "pythonPath": "/Users/jackli/miniconda3/envs/cryptotradelib/bin/python",
+            "console": "integratedTerminal",
+            "python.envFile": "${workspaceFolder}/.env"
         },
         {
             "name": "test_run_etl",
@@ -18,7 +19,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": false,
-            "pythonPath": "/home/jack_li/miniconda3/envs/ccxt/bin/python3.10",
+            "pythonPath": "/Users/jackli/miniconda3/envs/cryptotradelib/bin/python",
             "console": "integratedTerminal",
             "python.envFile": "${workspaceFolder}/.env",
             "args": [

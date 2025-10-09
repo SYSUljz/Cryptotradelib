@@ -1,0 +1,68 @@
+# environment.yml
+
+name: cryptotradelib
+channels:
+  - defaults
+dependencies:
+  - blas=1.0=openblas
+  - bottleneck=1.4.2=py312ha86b861_0
+  - bzip2=1.0.8=h80987f9_6
+  - ca-certificates=2025.9.9=hca03da5_0
+  - expat=2.7.1=h313beb8_0
+  - libcxx=20.1.8=h8869778_0
+  - libffi=3.4.4=hca03da5_1
+  - libgfortran=5.0.0=11_3_0_hca03da5_28
+  - libgfortran5=11.3.0=h009349e_28
+  - libopenblas=0.3.30=hf2bb037_0
+  - libzlib=1.3.1=h5f15de7_0
+  - llvm-openmp=20.1.8=he822017_0
+  - ncurses=6.5=hee39554_0
+  - numexpr=2.11.0=py312h8c72970_1
+  - numpy=2.0.1=py312h7f4fdc5_1
+  - numpy-base=2.0.1=py312he047099_1
+  - openssl=3.0.17=h4ee41c1_0
+  - pandas=2.3.2=py312h43d6402_0
+  - pip=25.2=pyhc872135_0
+  - python=3.12.11=h421de30_0
+  - python-dateutil=2.9.0post0=py312hca03da5_2
+  - python-tzdata=2025.2=pyhd3eb1b0_0
+  - pytz=2025.2=py312hca03da5_0
+  - readline=8.3=h0b18652_0
+  - setuptools=78.1.1=py312hca03da5_0
+  - six=1.17.0=py312hca03da5_0
+  - sqlite=3.50.2=h79febb2_1
+  - tk=8.6.15=hcd8a7d5_0
+  - tzdata=2025b=h04d1e81_0
+  - wheel=0.45.1=py312hca03da5_0
+  - xz=5.6.4=h80987f9_1
+  - zlib=1.3.1=h5f15de7_0
+  - pip:
+      - aiodns==3.5.0
+      - aiohappyeyeballs==2.6.1
+      - aiohttp==3.12.15
+      - aiosignal==1.4.0
+      - asciichartpy==1.5.25
+      - attrs==25.3.0
+      - backtrader==1.9.78.123
+      - ccxt==4.5.5
+      - certifi==2025.8.3
+      - cffi==2.0.0
+      - charset-normalizer==3.4.3
+      - cramjam==2.11.0
+      - cryptography==46.0.1
+      - fastparquet==2024.11.0
+      - frozenlist==1.7.0
+      - fsspec==2025.9.0
+      - idna==3.10
+      - multidict==6.6.4
+      - narwhals==2.5.0
+      - packaging==25.0
+      - plotly==6.3.0
+      - propcache==0.3.2
+      - pycares==4.11.0
+      - pycparser==2.23
+      - requests==2.32.5
+      - typing-extensions==4.15.0
+      - urllib3==2.5.0
+      - yarl==1.20.1
+
