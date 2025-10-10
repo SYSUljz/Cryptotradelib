@@ -1,5 +1,7 @@
 {
     "version": "0.2.0",
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "configurations": [
         {
             "name": "test_run",
@@ -28,7 +30,26 @@
                 "--exchange",
                 "binance",
                 "--start_date",
-                "2023-01-01"
+                "2025-10-01"
+            ]
+        },
+        {
+            "name": "test_run_etl_Future",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "pythonPath": "/Users/jackli/miniconda3/envs/cryptotradelib/bin/python",
+            "console": "integratedTerminal",
+            "python.envFile": "${workspaceFolder}/.env",
+            "args": [
+                "--symbol",
+                "BTC/USDT",
+                "--exchange",
+                "binanceusdm",
+                "--start_date",
+                "2025-10-01"
             ]
         },
     ]
