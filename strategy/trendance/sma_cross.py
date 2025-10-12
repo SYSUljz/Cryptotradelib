@@ -4,7 +4,13 @@ import backtrader as bt
 logger = logging.getLogger("backtest")
 
 
-class TestStrategy(bt.Strategy):
+class SmaCrossStrategy(bt.Strategy):
+    """
+    A simple strategy based on the crossover of the closing price and a
+    Simple Moving Average (SMA). Buys when the close is above the SMA and
+    sells when it's below.
+    """
+
     params = (
         ("maperiod", 15),
         ("printlog", False),
@@ -12,10 +18,9 @@ class TestStrategy(bt.Strategy):
 
     def log(self, txt, dt=None, doprint=False):
         """Logging function for this strategy"""
-        dt = dt or bt.num2date(self.datas[0].datetime[0])
-        message = f"{dt.isoformat()}, {txt}"
         if self.params.printlog or doprint:
-            logging.info(message)
+            dt = dt or self.datas[0].datetime.date(0)
+            print(f"{dt.isoformat()}, {txt}")
 
     def __init__(self):
         self.dataclose = self.datas[0].close
@@ -33,15 +38,15 @@ class TestStrategy(bt.Strategy):
         if order.status in [order.Completed]:
             if order.isbuy():
                 self.log(
-                    "BUY EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f"
-                    % (order.executed.price, order.executed.value, order.executed.comm)
+                    f"BUY EXECUTED, Price: {order.executed.price:.2f}, "
+                    f"Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
                 )
                 self.buyprice = order.executed.price
                 self.buycomm = order.executed.comm
             else:
                 self.log(
-                    "SELL EXECUTED, Price: %.2f, Cost: %.2f, Comm %.2f"
-                    % (order.executed.price, order.executed.value, order.executed.comm)
+                    f"SELL EXECUTED, Price: {order.executed.price:.2f}, "
+                    f"Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
                 )
             self.bar_executed = len(self)
         elif order.status in [order.Canceled, order.Margin, order.Rejected]:
@@ -52,26 +57,23 @@ class TestStrategy(bt.Strategy):
     def notify_trade(self, trade):
         if not trade.isclosed:
             return
-        self.log("OPERATION PROFIT, GROSS %.2f, NET %.2f" % (trade.pnl, trade.pnlcomm))
+        self.log(f"OPERATION PROFIT, GROSS {trade.pnl:.2f}, NET {trade.pnlcomm:.2f}")
 
     def next(self):
-        self.log("Close, %.2f" % self.dataclose[0])
-
         if self.order:
             return
 
         if not self.position:
             if self.dataclose[0] > self.sma[0]:
-                self.log("BUY CREATE, %.2f" % self.dataclose[0])
+                self.log(f"BUY CREATE, {self.dataclose[0]:.2f}")
                 self.order = self.buy()
         else:
             if self.dataclose[0] < self.sma[0]:
-                self.log("SELL CREATE, %.2f" % self.dataclose[0])
+                self.log(f"SELL CREATE, {self.dataclose[0]:.2f}")
                 self.order = self.sell()
 
     def stop(self):
         self.log(
-            "(MA Period %2d) Ending Value %.2f"
-            % (self.params.maperiod, self.broker.getvalue()),
+            f"(MA Period {self.params.maperiod}) Ending Value {self.broker.getvalue():.2f}",
             doprint=True,
         )

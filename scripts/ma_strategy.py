@@ -7,7 +7,7 @@ import pandas as pd
 import backtrader as bt
 import logging
 from data_processor.loader import load_from_parquet
-from strategy.move_avg import TestStrategy
+from strategy.trendance import sma_cross 
 import matplotlib
 from utils.logger import setup_logger
 
@@ -15,7 +15,7 @@ logger = setup_logger("backtest")
 
 if __name__ == "__main__":
     cerebro = bt.Cerebro()
-    cerebro.addstrategy(TestStrategy, maperiod=15, printlog=False)
+    cerebro.addstrategy(sma_cross.SmaCrossStrategy, maperiod=15, printlog=False)
 
     df = load_from_parquet(
         data_root="data",
@@ -23,7 +23,7 @@ if __name__ == "__main__":
         exchange="binance",
         symbol="BTC/USDT",
         start_date="2025-10-01",
-        end_date="2025-10-05",
+        end_date="2025-10-12",
     )
 
     df["datetime"] = pd.to_datetime(df["datetime"]).dt.tz_localize(None)
