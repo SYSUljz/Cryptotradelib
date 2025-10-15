@@ -15,14 +15,15 @@ logger = setup_logger("backtest")
 
 if __name__ == "__main__":
     cerebro = bt.Cerebro()
-    cerebro.addstrategy(macd.MacdStrategy,printlog=False)
+    cerebro.addstrategy(macd.MacdStrategy, printlog=True)
 
     df = load_from_parquet(
         data_root="data",
-        data_type="ohlcv_1m",
+        data_type="ohlcv",
         exchange="binance",
+        timeframe="1d",
         symbol="BTC/USDT",
-        start_date="2025-10-01",
+        start_date="2022-10-01",
         end_date="2025-10-12",
     )
 
@@ -31,17 +32,16 @@ if __name__ == "__main__":
     data = bt.feeds.PandasData(
         dataname=df,
         datetime="datetime",
-        timeframe=bt.TimeFrame.Minutes,
+        timeframe=bt.TimeFrame.Days,
         compression=1,
     )
 
     cerebro.adddata(data)
-    cerebro.broker.setcash(100000.0)
+    cerebro.broker.setcash(10000000.0)
     cerebro.addsizer(bt.sizers.FixedSize, stake=0.001)
     cerebro.broker.setcommission(commission=0.01)
 
     logging.info("Starting Portfolio Value: %.2f" % cerebro.broker.getvalue())
     cerebro.run(maxcpus=1)
     logging.info("Final Portfolio Value: %.2f" % cerebro.broker.getvalue())
-    # logging.info(f"Logs saved to: {LOG_FILE}")
     cerebro.plot()
