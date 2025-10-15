@@ -4,7 +4,9 @@ import os
 from config import DATA_ROOT_PATH
 
 
-def save_to_parquet(df: pd.DataFrame, data_type: str, exchange: str, symbol: str,timeframe: str = '1m'):
+def save_to_parquet(
+    df: pd.DataFrame, data_type: str, exchange: str, symbol: str, timeframe: str = "1m"
+):
     """
     将DataFrame按分区格式存储为Parquet文件
     分区: exchange/symbol/date
@@ -19,7 +21,7 @@ def save_to_parquet(df: pd.DataFrame, data_type: str, exchange: str, symbol: str
 
     # 从datetime列创建date分区
     if "datetime" in df.columns:
-        if timeframe.endswith('m') or timeframe.endswith('s'):
+        if timeframe.endswith("m") or timeframe.endswith("s"):
             df["date"] = df["datetime"].dt.strftime("%Y-%m-%d")
         else:
             df["date"] = df["datetime"].dt.strftime("%Y")
@@ -38,7 +40,7 @@ def save_to_parquet(df: pd.DataFrame, data_type: str, exchange: str, symbol: str
     )
     os.makedirs(base_path, exist_ok=True)
     # 使用 a dataset API with partitioning
-    
+
     try:
         df.to_parquet(
             base_path,

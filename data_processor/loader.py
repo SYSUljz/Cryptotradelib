@@ -7,6 +7,7 @@ def load_from_parquet(
     data_root: str,
     data_type: str,
     exchange: str,
+    timeframe: str,
     symbol: str,
     start_date: str = None,
     end_date: str = None,
@@ -38,7 +39,9 @@ def load_from_parquet(
         Concatenated DataFrame with all rows in the requested date range.
     """
     symbol_path_name = symbol.replace("/", "_")
-    base_path = os.path.join(data_root, data_type, exchange, symbol_path_name)
+    base_path = os.path.join(
+        data_root, data_type, exchange, timeframe, symbol_path_name
+    )
 
     if not os.path.exists(base_path):
         raise FileNotFoundError(f"Data path not found: {base_path}")
