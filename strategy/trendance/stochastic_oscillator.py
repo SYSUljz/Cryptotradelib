@@ -1,5 +1,6 @@
 import backtrader as bt
 
+
 # ====================================================================
 # 6. Stochastic Oscillator Strategy
 # ====================================================================
@@ -23,6 +24,36 @@ class StochasticStrategy(bt.Strategy):
             dt = dt or self.datas[0].datetime.date(0)
             print(f"{dt.isoformat()}, {txt}")
 
+    def notify_order(self, order):
+        """
+        Handles order notifications.
+        Resets self.order when the order is completed.
+        """
+        if order.status in [order.Submitted, order.Accepted]:
+            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
+            return
+
+        # Check if an order has been completed
+        if order.status in [order.Completed]:
+            if order.isbuy():
+                self.log(
+                    f"BUY EXECUTED, Price: {order.executed.price:.2f}, Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
+                )
+                self.buyprice = order.executed.price
+                self.buycomm = order.executed.comm
+            else:  # Sell
+                self.log(
+                    f"SELL EXECUTED, Price: {order.executed.price:.2f}, Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
+                )
+
+            self.bar_executed = len(self)
+
+        elif order.status in [order.Canceled, order.Margin, order.Rejected]:
+            self.log("Order Canceled/Margin/Rejected")
+
+        # Reset order status
+        self.order = None
+
     def __init__(self):
         self.dataclose = self.datas[0].close
         self.order = None
@@ -31,6 +62,36 @@ class StochasticStrategy(bt.Strategy):
             period=self.params.period,
             period_d_slow=self.params.period_d_slow,
         )
+
+    def notify_order(self, order):
+        """
+        Handles order notifications.
+        Resets self.order when the order is completed.
+        """
+        if order.status in [order.Submitted, order.Accepted]:
+            # Buy/Sell order submitted/accepted to/by broker - Nothing to do
+            return
+
+        # Check if an order has been completed
+        if order.status in [order.Completed]:
+            if order.isbuy():
+                self.log(
+                    f"BUY EXECUTED, Price: {order.executed.price:.2f}, Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
+                )
+                self.buyprice = order.executed.price
+                self.buycomm = order.executed.comm
+            else:  # Sell
+                self.log(
+                    f"SELL EXECUTED, Price: {order.executed.price:.2f}, Cost: {order.executed.value:.2f}, Comm: {order.executed.comm:.2f}"
+                )
+
+            self.bar_executed = len(self)
+
+        elif order.status in [order.Canceled, order.Margin, order.Rejected]:
+            self.log("Order Canceled/Margin/Rejected")
+
+        # Reset order status
+        self.order = None
 
     def next(self):
         if self.order:
